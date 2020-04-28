@@ -3,21 +3,25 @@ package com.lukasz.functionalities;
 import com.lukasz.data.CurrentPath;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class CdCommand {
 
-    public String getParentDirectory(CurrentPath currentPath) {
+    public String getParentDirectory(CurrentPath currentPath) throws InvalidParentDirectory {
+
         String parentPath = "";
-        try {
-            File file = currentPath.getPath().toFile();
-            Path path = Paths.get(file.getParent());
-            currentPath.setPath(path);
-            parentPath = path.toString();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+        File file = currentPath.getPath().toFile();
+        if (Files.notExists(file.toPath().getParent())) {
+            throw new InvalidParentDirectory("Parent directory doesn't exist!");
         }
+        Path path = Paths.get(file.getParent());
+
+        currentPath.setPath(path);
+        parentPath = path.toString();
+
+
         return parentPath;
     }
 

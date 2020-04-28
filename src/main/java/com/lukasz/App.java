@@ -4,6 +4,7 @@ import com.lukasz.data.CurrentPath;
 import com.lukasz.data.StatisticCommand;
 import com.lukasz.functionalities.CdCommand;
 import com.lukasz.functionalities.DirCommand;
+import com.lukasz.functionalities.InvalidParentDirectory;
 import com.lukasz.functionalities.PromptCommand;
 
 import java.util.Map;
@@ -27,13 +28,21 @@ public class App {
                 dirCommand.displayDirectoryContent(currentPath);
                 statisticCommand.countCommand("dir");
             } else if (userInput.equals("cd..")) {
-                System.out.println(cdCommand.getParentDirectory(currentPath));
+                try {
+                    System.out.println(cdCommand.getParentDirectory(currentPath));
+                } catch (InvalidParentDirectory invalidParentDirectory) {
+                    invalidParentDirectory.printStackTrace();
+                }
                 statisticCommand.countCommand("cd");
             } else if ((userInput.length() > 3) && (userInput.equals("cd " + userInput.substring(3)))) {
                 cdCommand.getExistingSubdirectory(currentPath, userInput.substring(3));
                 statisticCommand.countCommand("cd");
             } else if (userInput.equals("prompt $cwd")) {
-                promptCommand.displayCurrentWorkingDirectory(currentPath, cdCommand);
+                try {
+                    promptCommand.displayCurrentWorkingDirectory(currentPath, cdCommand);
+                } catch (InvalidParentDirectory invalidParentDirectory) {
+                    invalidParentDirectory.printStackTrace();
+                }
                 statisticCommand.countCommand("prompt");
             } else if ((userInput.length() > 7) && (userInput.equals("prompt " + userInput.substring(7)))) {
                 promptCommand.displayWord(userInput.substring(7));

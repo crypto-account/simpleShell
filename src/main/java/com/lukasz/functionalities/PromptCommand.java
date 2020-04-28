@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class PromptCommand {
     Scanner scanner = new Scanner(System.in);
 
-    public void displayCurrentWorkingDirectory(CurrentPath currentPath, CdCommand cdCommand) {
+    public void displayCurrentWorkingDirectory(CurrentPath currentPath, CdCommand cdCommand) throws InvalidParentDirectory {
         while (true) {
             System.out.print(currentPath.getPath() + ">");
             String userInput = scanner.nextLine();
