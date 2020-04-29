@@ -8,16 +8,21 @@ import java.util.Scanner;
 
 public class PromptCommand {
     Scanner scanner = new Scanner(System.in);
+    PathManager pathManager;
 
-    public void displayCurrentWorkingDirectory(CurrentPath currentPath, CdCommand cdCommand) throws InvalidParentDirectory {
+    public PromptCommand(PathManager pathManager) {
+        this.pathManager = pathManager;
+    }
+
+    public void  displayCurrentWorkingDirectory(CurrentPath currentPath) throws InvalidParentDirectory {
         while (true) {
             System.out.print(currentPath.getPath() + ">");
             String userInput = scanner.nextLine();
 
             if (userInput.equals("cd..")) {
-                cdCommand.getParentDirectory(currentPath);
+                pathManager.getParentDirectory();
             } else if (userInput.equals("cd " + userInput.substring(3))) {
-                cdCommand.getExistingSubdirectory(currentPath, userInput.substring(3));
+                pathManager.getExistingSubdirectory(userInput.substring(3));
             } else if (userInput.equals("tree")) {
                 displayDirectoryTree(currentPath);
             } else if (userInput.equals("prompt reset")) {

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CurrentPath {
     private Path path;
-    private List<String> subdirectories = new LinkedList<>();
+//    private List<String> subdirectories = new LinkedList<>();
 
     public CurrentPath() {
         path = Paths.get(System.getProperty("user.dir"));
@@ -21,8 +21,8 @@ public class CurrentPath {
         this.path = path;
     }
 
-    public List<String> getSubdirectories() {
-        return subdirectories;
-    }
+//    public List<String> getSubdirectories() {
+//        return subdirectories;
+//    }
 }
 

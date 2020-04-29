@@ -1,4 +1,4 @@
-package com.lukasz.data;
+package com.lukasz.functionalities;
 
 import java.util.*;
 
@@ -9,7 +9,7 @@ public class StatisticCommand {
         return commandsList;
     }
 
-    public void countCommand(String command) {
+    public void addCommand(String command) {
         commandsList.add(command);
     }
 
